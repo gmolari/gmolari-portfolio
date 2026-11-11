@@ -16,8 +16,8 @@ export function generateStaticParams() {
 }
 
 const descriptions = {
-  en: "Guilherme Molari, senior software engineer from Londrina, Brazil. Full stack with Next.js, React and TypeScript, specialized in gamification, iGaming and web games built with PixiJS.",
-  pt: "Guilherme Molari, engenheiro de software sênior em Londrina. Full stack com Next.js, React e TypeScript, especializado em gamificação, iGaming e jogos web com PixiJS.",
+  en: "Guilherme Molari, senior full stack engineer from Londrina, Brazil. Web apps, APIs and mobile with Next.js, React, TypeScript, Node.js and .NET, plus web games with PixiJS. Former Tech Lead.",
+  pt: "Guilherme Molari, engenheiro full stack sênior em Londrina. Aplicações web, APIs e mobile com Next.js, React, TypeScript, Node.js e .NET, além de jogos web com PixiJS. Ex-Tech Lead.",
 };
 
 export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Promise<Metadata> {
@@ -32,8 +32,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     authors: [{ name: person.name, url: person.github }],
     creator: person.name,
     keywords: [
-      person.name, "Guilherme Molari", "gmolari", "portfolio", "full stack", "gamification", "gamificação", "iGaming",
-      "game developer", "Londrina", ...skillList.slice(0, 12),
+      person.name, "gmolari", "portfolio", "senior full stack engineer", "desenvolvedor full stack", "software engineer",
+      "tech lead", "Next.js developer", "React developer", "Londrina", "gamification", ...skillList.slice(0, 12),
     ],
     alternates: { canonical: absolute(`/${lang}`), languages: languageAlternates("") },
     openGraph: {
