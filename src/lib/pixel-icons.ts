@@ -237,6 +237,45 @@ const icons: Record<string, (p: Pix) => void> = {
     p.shape(poly([[12.5, 2.5], [19.5, 2.5], [16, 8.5]]), ["#8a1018", "#e23a3a", "#ff8a7a"], vert(2, 9), "#2a0406");
   },
 
+  "gamification-bko": (p) => {
+    tile(p, ["#0b1230", "#152257", "#21388a", "#3456b8"], "#050a1c");
+    // monitor
+    p.shape(rbox(3, 5, 24, 17, 2), ["#1c2030", "#2e3448", "#454d68"], vert(5, 22), "#05070f");
+    p.shape(box(5, 7, 20, 13), ["#0a2a28", "#0f3b38", "#155450"], vert(7, 20));
+    // bar chart
+    const bars: [number, number, Ramp][] = [
+      [7, 12, ["#2a8a4a", "#4cd06a", "#a8f0b0"]],
+      [11, 9, ["#2a63d4", "#5a92ff", "#bcd2ff"]],
+      [15, 14, ["#c8901c", "#f6c445", "#fff3b0"]],
+      [19, 7, ["#c2232a", "#ef4a4a", "#ffb0a0"]],
+    ];
+    for (const [x, top, ramp] of bars) p.shape(box(x, top, 3, 19 - top), ramp, (bx) => 1 - (bx - x) / 3);
+    for (let x = 6; x < 24; x += 2) p.dot(x, 19, "#2c5a55");
+    p.shape(box(13, 22, 4, 3), ["#2e3448", "#454d68"], flat(0.5), "#05070f");
+    p.shape(box(9, 25, 12, 2), ["#2e3448", "#5a6380"], vert(25, 27), "#05070f");
+    // padlock (2FA)
+    p.shape(ring(24, 19.5, 2.2, 3.6), ["#7d8898", "#c3ccd8", "#eef2f6"], vert(15, 21), "#05070f");
+    p.shape(rbox(19.5, 19.5, 9, 8, 1.5), ["#8a5a08", "#d99a1a", "#ffd04a", "#fff2b0"], vert(19, 28), "#2a1802");
+    p.shape(box(23, 22, 2, 3), ["#2a1802", "#3a2402"], flat(0.5));
+  },
+
+  "pgx-ui": (p) => {
+    tile(p, ["#2a0a24", "#4f1446", "#7d1f6c", "#b03392"], "#16040f");
+    const block = (x: number, y: number, ramp: Ramp) => p.shape(rbox(x, y, 11, 11, 2.5), ramp, (bx, by) => 1 - ((bx - x) + (by - y)) / 22, "#120410");
+    block(4, 4, ["#1f5fb0", "#3a8ae8", "#8cc4ff"]);
+    block(17, 4, ["#1a8a5a", "#33c47f", "#a6f0c8"]);
+    block(4, 17, ["#c8901c", "#f6c445", "#fff3b0"]);
+    block(17, 17, ["#b01e3c", "#e72264", "#ff8ab0"]);
+    // play symbol = minigames
+    p.shape(poly([[20.5, 19.5], [20.5, 26.5], [26, 23]]), ["#ffe0ec", "#ffffff"], flat(1));
+    // component glyphs: button, toggle, slider
+    p.shape(box(6.5, 8, 6, 2), ["#d6ecff", "#ffffff"], flat(1));
+    p.shape(rbox(19, 7.5, 7, 3, 1.5), ["#0e5a3a", "#126b45"], flat(0.6));
+    p.shape(disk(24.3, 9, 1.4), ["#d6ffe9", "#ffffff"], flat(1));
+    p.shape(box(6, 22, 7, 1), ["#5a3a04", "#7a5208"], flat(0.6));
+    p.shape(disk(9.5, 22.5, 1.6), ["#ffffff", "#ffffff"], flat(1));
+  },
+
   citybuilder: (p) => {
     tile(p, ["#1c4a7a", "#2f6eb0", "#4f96d8", "#8cc4f2"], "#0c2440");
     p.shape(disk(25, 7, 2.8), ["#ffd04a", "#fff2b0", "#ffffff"], sphere(25, 7, 2.8, 0.5));

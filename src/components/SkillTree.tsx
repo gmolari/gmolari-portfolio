@@ -250,7 +250,7 @@ export function SkillTree({ nodes, links, labels }: { nodes: TreeNode[]; links: 
     <div className="relative">
       <div
         ref={vpRef}
-        className="relative h-[clamp(520px,110vw,560px)] cursor-grab sm:h-[clamp(420px,60vw,520px)] touch-none overflow-hidden rounded-lg border-2 border-edge bg-slot shadow-[inset_0_0_0_2px_var(--frame-in),inset_0_0_60px_rgb(0_0_0/0.45)] select-none active:cursor-grabbing"
+        className="relative h-[clamp(520px,110vw,560px)] cursor-grab sm:h-[clamp(420px,60vw,520px)] touch-none overflow-hidden rounded-lg border-2 border-edge bg-slot shadow-[inset_0_0_0_2px_var(--frame-in),inset_0_0_60px_var(--map-glow)] select-none active:cursor-grabbing"
         style={{
           backgroundImage: `${RUNE_PATTERN}, radial-gradient(circle, var(--gridline) 1.5px, transparent 1.6px), linear-gradient(var(--gridline) 1px, transparent 1px), linear-gradient(90deg, var(--gridline) 1px, transparent 1px)`,
           backgroundSize: `${bgSize(240)}, ${bgSize(32)}, ${bgSize(128)}, ${bgSize(128)}`,
@@ -262,7 +262,7 @@ export function SkillTree({ nodes, links, labels }: { nodes: TreeNode[]; links: 
         onPointerCancel={onPointerUp}
       >
         {/* vignette */}
-        <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgb(0_0_0/0.35))]" />
+        <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(ellipse_at_center,transparent_55%,var(--vignette))]" />
 
         <div
           className={`absolute top-0 left-0 origin-top-left transition-opacity duration-300 ${ready ? "opacity-100" : "opacity-0"}`}
@@ -334,7 +334,7 @@ export function SkillTree({ nodes, links, labels }: { nodes: TreeNode[]; links: 
                   <span className="spark s3" aria-hidden="true" />
                   <span className="spark s4" aria-hidden="true" />
                 </span>
-                <span className="rounded-md bg-frame-in/70 px-1.5 py-px font-pixel text-[14px] leading-tight whitespace-nowrap text-[#e6f2ee]">{n.label}</span>
+                <span className="rounded-md border border-edge/60 bg-(--label-bg) px-1.5 py-px font-pixel text-[14px] leading-tight whitespace-nowrap text-(--label-ink)">{n.label}</span>
                 <span className="flex gap-[3px]">
                   {[1, 2, 3, 4, 5].map((i) => (
                     <i key={i} className={`block size-[7px] rotate-45 border border-frame-in ${i <= n.level ? "bg-accent" : "bg-slot"}`} />
@@ -357,10 +357,10 @@ export function SkillTree({ nodes, links, labels }: { nodes: TreeNode[]; links: 
             <Glyph name="target" size={14} />
           </button>
         </div>
-        <div className="pointer-events-none absolute top-2.5 left-3 z-20 flex max-w-[calc(100%-90px)] items-center gap-1.5 rounded-md bg-frame-in/70 px-2 py-1 text-[11.5px] leading-tight text-[#cfe3de]">
+        <div className="pointer-events-none absolute top-2.5 left-3 z-20 flex max-w-[calc(100%-90px)] items-center gap-1.5 rounded-md border border-edge/60 bg-(--label-bg) px-2 py-1 text-[11.5px] leading-tight text-(--label-ink)">
           <Glyph name="pad" size={12} /> {labels.controls.help}
         </div>
-        <div className="pointer-events-none absolute top-2.5 right-3 z-20 rounded-md bg-frame-in/70 px-2 py-0.5 font-pixel text-[12px] text-[#cfe3de] tabular-nums">
+        <div className="pointer-events-none absolute top-2.5 right-3 z-20 rounded-md border border-edge/60 bg-(--label-bg) px-2 py-0.5 font-pixel text-[12px] text-(--label-ink) tabular-nums">
           {Math.round(view.k * 100)}%
         </div>
       </div>

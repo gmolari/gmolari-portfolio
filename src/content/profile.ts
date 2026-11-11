@@ -90,27 +90,27 @@ export const skills: SkillNode[] = [
   {
     id: "ts", label: "TypeScript", icon: "typescript", x: 50, y: 0, level: 5, category: cat.core,
     note: { en: "The language behind almost everything I ship, front and back. Strict types, shared contracts between API and UI, Zod for runtime validation.", pt: "A linguagem por trás de quase tudo que eu entrego, no front e no back. Tipagem estrita, contratos compartilhados entre API e UI, Zod para validação em runtime." },
-    usedIn: ["supernova-bet", "gamification-loop", "vortexvolley", "bigette", "game-lab"], extras: ["JavaScript", "Zod"],
+    usedIn: ["gamification-bko", "pgx-ui", "supernova-bet", "vortexvolley", "game-lab"], extras: ["JavaScript", "Zod"],
   },
   {
     id: "react", label: "React", icon: "react", x: 25, y: 26, level: 5, category: cat.front,
     note: { en: "Component libraries and design systems built from Figma, state with Zustand and React Query, and a lot of performance work on heavy, real-time screens.", pt: "Bibliotecas de componentes e design systems a partir do Figma, estado com Zustand e React Query, e muito trabalho de performance em telas pesadas e em tempo real." },
-    usedIn: ["supernova-bet", "gamification-loop", "minigames", "bigette"], extras: ["Zustand", "React Query", "Framer Motion"],
+    usedIn: ["pgx-ui", "gamification-bko", "supernova-bet", "gamification-loop", "bigette"], extras: ["Zustand", "React Query", "Framer Motion"],
   },
   {
     id: "next", label: "Next.js", icon: "nextjs", x: 6, y: 54, level: 5, category: cat.front,
     note: { en: "App Router, server components, SSR and SSG, SEO and Core Web Vitals. This portfolio runs on Next.js 16.", pt: "App Router, server components, SSR e SSG, SEO e Core Web Vitals. Este portfólio roda em Next.js 16." },
-    usedIn: ["supernova-bet", "gamification-loop", "bigette", "minigames"], extras: ["Tailwind CSS", "Vercel"],
+    usedIn: ["gamification-bko", "supernova-bet", "gamification-loop", "bigette"], extras: ["Tailwind CSS", "Vercel"],
   },
   {
     id: "figma", label: "Figma", icon: "figma", x: 25, y: 82, level: 4, category: cat.tools,
     note: { en: "I work straight from Figma files with designers: tokens, components and pixel-accurate implementation.", pt: "Trabalho direto dos arquivos do Figma com o design: tokens, componentes e implementação fiel ao pixel." },
-    usedIn: ["supernova-bet", "gamification-loop"], extras: ["Design tokens", "Handoff"],
+    usedIn: ["pgx-ui", "supernova-bet", "gamification-loop"], extras: ["Code Connect", "Design tokens"],
   },
   {
     id: "pixi", label: "PixiJS", icon: "pixijs", x: 42, y: 54, level: 5, category: cat.game,
     note: { en: "WebGL 2D for minigames, slot reels and full casual games. I wrote my own engine on top of it for three games.", pt: "WebGL 2D para minigames, rolos de slot e jogos casuais completos. Escrevi meu próprio motor em cima dele para três jogos." },
-    usedIn: ["gamification-loop", "game-lab", "sweepstakes", "minigames"], extras: ["Canvas", "WebGL"],
+    usedIn: ["pgx-ui", "game-lab", "sweepstakes", "gamification-bko"], extras: ["Canvas", "WebGL"],
   },
   {
     id: "capacitor", label: "Capacitor", icon: "capacitor", x: 50, y: 82, level: 4, category: cat.mobile,
@@ -139,7 +139,7 @@ export const skills: SkillNode[] = [
   },
   {
     id: "dotnet", label: "C# · .NET", icon: "dotnet", x: 94, y: 54, level: 3, category: cat.back,
-    note: { en: "ASP.NET Web APIs and CRUD back ends with Entity Framework and MySQL.", pt: "Web APIs e back ends CRUD em ASP.NET com Entity Framework e MySQL." },
+    note: { en: "ASP.NET Web APIs with Entity Framework. At GMaster I built endpoints and architecture for an internal client management and financial consulting system.", pt: "Web APIs em ASP.NET com Entity Framework. Na GMaster criei endpoints e ajudei na arquitetura de um sistema interno de gestão de clientes e consultoria financeira." },
     usedIn: [], extras: ["ASP.NET", "Entity Framework"],
   },
   {
@@ -162,6 +162,17 @@ export const skillLinks: [string, string][] = [
 
 export const quests = [
   {
+    id: "gmaster",
+    org: "GMaster",
+    badge: "GM",
+    role: { en: "Full Stack Developer", pt: "Desenvolvedor Full Stack" } as T,
+    text: {
+      en: "Evolved an established internal system for client management and financial consulting. Built REST endpoints in C# and .NET, new screens in Next.js and took part in architecture decisions, plus data modeling and queries, integrations, performance fixes, bug hunting and code review across the whole stack.",
+      pt: "Evoluí um sistema interno já em produção de gestão de clientes e consultoria financeira. Criei endpoints REST em C# e .NET, desenvolvi telas em Next.js e participei da construção da arquitetura, além de modelagem de dados e consultas, integrações, melhorias de performance, correção de bugs e code review em toda a stack.",
+    } as T,
+    tags: { en: ["C#", ".NET", "Next.js", "REST APIs", "Architecture"], pt: ["C#", ".NET", "Next.js", "APIs REST", "Arquitetura"] },
+  },
+  {
     id: "ana",
     org: "Ana Gaming",
     badge: "AG",
@@ -173,15 +184,15 @@ export const quests = [
     tags: { en: ["Leadership", "Architecture", "Code review"], pt: ["Liderança", "Arquitetura", "Code review"] },
   },
   {
-    id: "supernova",
-    org: "Supernova Gaming",
-    badge: "SG",
-    role: { en: "Senior Front-end Engineer", pt: "Engenheiro Front-end Sênior" } as T,
+    id: "startbet",
+    org: "StartBet",
+    badge: "ST",
+    role: { en: "Front-end Engineer", pt: "Engenheiro Front-end" } as T,
     text: {
-      en: "One of the first engineers on the Supernova Bet platform: real-time features, REST and payment provider integrations, back offices and a shared component library. Later took ownership of the gamification layer and built it almost entirely on my own.",
-      pt: "Um dos pioneiros na plataforma Supernova Bet: recursos em tempo real, integrações REST e com provedores de pagamento, backoffices e uma biblioteca de componentes compartilhada. Depois assumi a camada de gamificação e a construí praticamente sozinho.",
+      en: "Built gamification features and platform solutions for the betting product: reusable components, acquisition flows and tools that helped the team ship faster.",
+      pt: "Desenvolvi funcionalidades de gamificação e soluções para a plataforma de apostas: componentização, fluxos de aquisição e ferramentas que ajudaram o time a entregar mais rápido.",
     } as T,
-    tags: { en: ["Next.js", "Real time", "Payments", "Gamification"], pt: ["Next.js", "Tempo real", "Pagamentos", "Gamificação"] },
+    tags: { en: ["Gamification", "Components", "Acquisition"], pt: ["Gamificação", "Componentização", "Aquisição"] },
   },
   {
     id: "multibet",
@@ -193,6 +204,17 @@ export const quests = [
       pt: "Desenvolvi funcionalidades do produto e de ferramentas internas: Multi-verso, backoffice de indicação, painéis de cadastro de popups e minigames e landing pages, partindo do Figma com React Query e Zustand.",
     } as T,
     tags: { en: ["React", "Back offices", "Landing pages"], pt: ["React", "Backoffices", "Landing pages"] },
+  },
+  {
+    id: "supernova",
+    org: "Supernova Gaming",
+    badge: "SG",
+    role: { en: "Senior Front-end Engineer", pt: "Engenheiro Front-end Sênior" } as T,
+    text: {
+      en: "One of the first engineers on the Supernova Bet platform: real-time features, REST and payment provider integrations, back offices and a shared component library. Later took responsibility for the gamification layer together with the team and kicked off its projects. The gamification loop front-end I built 100% on my own.",
+      pt: "Um dos pioneiros na plataforma Supernova Bet: recursos em tempo real, integrações REST e com provedores de pagamento, backoffices e uma biblioteca de componentes compartilhada. Depois assumi a responsabilidade pela camada de gamificação junto com a equipe e iniciei os projetos. O front do loop de gamificação foi 100% feito por mim.",
+    } as T,
+    tags: { en: ["Next.js", "Real time", "Payments", "Gamification"], pt: ["Next.js", "Tempo real", "Pagamentos", "Gamificação"] },
   },
 ];
 
@@ -238,20 +260,62 @@ export const projects: Project[] = [
     sprite: "chest",
     rarity: "legendary",
     context: { en: "Supernova Gaming · Play4Tune", pt: "Supernova Gaming · Play4Tune" },
-    role: { en: "Built almost entirely solo", pt: "Construído praticamente solo" },
+    role: { en: "Front-end 100% solo · initiative led with the team", pt: "Front 100% por mim · iniciativa liderada com a equipe" },
     summary: {
       en: "The retention layer of an iGaming platform: missions, levels, rewards and minigames living inside the product.",
       pt: "A camada de retenção de uma plataforma de iGaming: missões, níveis, recompensas e minigames dentro do produto.",
     },
     how: {
-      en: "Players progress through missions and levels and earn rewards they can spend or play with. Minigames render in PixiJS, UI state lives in Zustand and server state in React Query, with a back office to configure every piece.",
-      pt: "O jogador avança por missões e níveis e ganha recompensas para gastar ou jogar. Os minigames rodam em PixiJS, o estado de UI fica no Zustand e o de servidor no React Query, com um backoffice para configurar cada peça.",
+      en: "Players progress through missions and levels and earn rewards they can spend or play with. Minigames and UI come from the PGX UI library, UI state lives in Zustand and server state in React Query, and everything is configured from the gamification back office.",
+      pt: "O jogador avança por missões e níveis e ganha recompensas para gastar ou jogar. Os minigames e a UI vêm da biblioteca PGX UI, o estado de UI fica no Zustand e o de servidor no React Query, e tudo é configurado pelo backoffice de gamificação.",
     },
     purpose: {
       en: "Turn one-off visits into a habit: acquisition, activation and retention.",
       pt: "Transformar visitas avulsas em hábito: aquisição, ativação e retenção.",
     },
     stack: ["Next.js", "React", "TypeScript", "PixiJS", "Framer Motion", "Zustand", "React Query"],
+  },
+  {
+    id: "gamification-bko",
+    name: "Gamification Back Office",
+    sprite: "chest",
+    rarity: "legendary",
+    context: { en: "Supernova Gaming · Play4Tune", pt: "Supernova Gaming · Play4Tune" },
+    role: { en: "Built entirely solo", pt: "Construído inteiro por mim" },
+    summary: {
+      en: "The admin panel that runs the whole gamification system: operators create and tune every mission, reward and game without a deploy.",
+      pt: "O painel que controla todo o sistema de gamificação: a operação cria e ajusta cada missão, prêmio e jogo sem precisar de deploy.",
+    },
+    how: {
+      en: "Missions and quests, store, points, levels, VIP ranks, tournaments, prediction pools, minigames, jackpots, themes, onboarding and webhooks, all multi-currency and multi-language, plus a Player 360 view and live dashboards. Builders work by drag and drop with a preview of the real app screen. Security first: two-factor authentication (TOTP with QR code and recovery codes), sessions in signed httpOnly cookies so the token never reaches the browser, server-side token injection and sanitized rich text. A super admin console provisions new tenants, and the panel adapts to each tenant's system version.",
+      pt: "Missões e quests, loja, pontos, níveis, ranks VIP, torneios, bolões, minigames, jackpots, temas, onboarding e webhooks, tudo multi-moeda e multi-idioma, além do Jogador 360 e dashboards ao vivo. Os construtores são de arrastar e soltar, com prévia da tela real do app. Segurança em primeiro lugar: autenticação em duas etapas (TOTP com QR code e códigos de recuperação), sessão em cookie httpOnly assinado para o token nunca chegar ao navegador, token injetado no servidor e texto rico sanitizado. Um console de super admin provisiona novos tenants, e o painel se adapta à versão do sistema de cada um.",
+    },
+    purpose: {
+      en: "Give the operations team full control of the loop, safely, with a refined UI they enjoy using every day.",
+      pt: "Dar à operação controle total do loop, com segurança e uma UI refinada que dá gosto de usar todo dia.",
+    },
+    stack: ["Next.js", "React", "TypeScript", "React Query", "TanStack Table", "React Hook Form", "Zod", "Recharts", "PixiJS", "next-intl", "PGX UI"],
+  },
+  {
+    id: "pgx-ui",
+    name: "PGX UI",
+    sprite: "controller",
+    rarity: "epic",
+    context: { en: "Supernova Gaming · Play4Tune", pt: "Supernova Gaming · Play4Tune" },
+    role: { en: "All the code solo · designs by the UX team in Figma", pt: "Todo o código por mim · design do time de UX no Figma" },
+    summary: {
+      en: "The company's component library: 81 React components, dynamic theming and seven minigames, shared by the gamification loop, the back office and Supernova Bet.",
+      pt: "A biblioteca de componentes da empresa: 81 componentes React, tema dinâmico e sete minigames, compartilhados pelo loop de gamificação, pelo backoffice e pela Supernova Bet.",
+    },
+    how: {
+      en: "Each brand's theme arrives from the API as tokens and flows through CSS variables into Tailwind, so one library dresses every white-label site. I wrote all the code, turning the UX team's Figma components into React, mapped back to Figma with Code Connect and documented in Storybook. The minigame engine runs on PixiJS 8 with the draw sealed on the server: wheel, mystery box and scratch card in production, plus mines, crash, penalty and slot ready on the same contract, with per-instance sound and assets uploaded from the back office.",
+      pt: "O tema de cada marca chega da API como tokens e desce por variáveis CSS até o Tailwind, então uma biblioteca veste todos os sites white-label. Escrevi todo o código, transformando os componentes do time de UX no Figma em React, ligados de volta ao Figma via Code Connect e documentados no Storybook. O motor de minigames roda em PixiJS 8 com o sorteio lacrado no servidor: roleta, caixa misteriosa e raspadinha em produção, além de mines, crash, pênalti e slot prontos no mesmo contrato, com som por instância e assets enviados pelo backoffice.",
+    },
+    purpose: {
+      en: "Centralize UI and games in one place so the loop and Supernova Bet ship faster and look consistent.",
+      pt: "Centralizar UI e jogos num lugar só para o loop e a Supernova Bet entregarem mais rápido e com visual consistente.",
+    },
+    stack: ["React", "TypeScript", "Tailwind", "PixiJS", "Framer Motion", "Storybook", "Figma", "Vitest", "npm"],
   },
   {
     id: "vortexvolley",
@@ -338,27 +402,6 @@ export const projects: Project[] = [
       pt: "Entender o modelo sweepstakes (EUA, Japão, Brasil) e o que é preciso para construir um.",
     },
     stack: ["JavaScript", "PixiJS", "Canvas", "Android WebView"],
-  },
-  {
-    id: "minigames",
-    name: "Daily Minigames",
-    sprite: "controller",
-    rarity: "rare",
-    context: { en: "Supernova Gaming", pt: "Supernova Gaming" },
-    role: { en: "Front-end", pt: "Front-end" },
-    summary: {
-      en: "Roulette, prize cases and scratch cards that players open every day.",
-      pt: "Roleta, caixas de prêmio e raspadinha que o jogador abre todo dia.",
-    },
-    how: {
-      en: "A spinning wheel with real easing, a sliding case roller and a canvas scratch card. The prize is chosen by weights and the animation lands exactly on it.",
-      pt: "Uma roleta com easing de verdade, um rolo de caixas deslizante e uma raspadinha em canvas. O prêmio é sorteado por pesos e a animação para exatamente nele.",
-    },
-    purpose: {
-      en: "A daily reason to come back, feeding the gamification loop.",
-      pt: "Um motivo diário para voltar, alimentando o loop de gamificação.",
-    },
-    stack: ["Next.js", "Framer Motion", "Canvas", "PixiJS"],
   },
   {
     id: "citybuilder",

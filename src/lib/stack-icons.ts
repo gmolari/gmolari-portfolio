@@ -1,7 +1,8 @@
 import {
   siAndroid, siCapacitor, siClaude, siDrizzle, siExpo, siFramer, siGoogleadmob, siHtml5, siJavascript, siKotlin,
   siNestjs, siNextdotjs, siOpenjdk, siPostgresql, siPrisma, siReact, siReactquery, siSocketdotio, siTailwindcss,
-  siThreedotjs, siTypescript, siVercel, siVite, siWebgl,
+  siThreedotjs, siTypescript, siVercel, siVite, siWebgl, siReacthookform, siStorybook, siZod, siReacttable, siFigma,
+  siVitest, siNpm, siI18next,
 } from "simple-icons";
 import type { IconData } from "./skill-icons";
 import { skillIcons } from "./skill-icons";
@@ -34,6 +35,15 @@ const map: Record<string, IconData> = {
   Java: p(siOpenjdk),
   WebGL: p(siWebgl),
   "Claude Code": p(siClaude),
+  "React Hook Form": p(siReacthookform),
+  Storybook: p(siStorybook),
+  Zod: p(siZod),
+  "TanStack Table": p(siReacttable),
+  Figma: p(siFigma),
+  "Code Connect": p(siFigma),
+  Vitest: p(siVitest),
+  npm: p(siNpm),
+  "next-intl": p(siI18next),
   PixiJS: skillIcons.pixijs,
   "PixiJS v8": skillIcons.pixijs,
 };

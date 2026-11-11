@@ -30,7 +30,7 @@ export function TechIcon({ icon, name, size = 16 }: { icon: IconData | null; nam
 export function TechChip({ icon, name }: { icon: IconData | null; name: string }) {
   return (
     <span className="inline-flex items-center gap-1.5 rounded-full border-2 border-edge bg-panel-2 py-0.5 pr-2.5 pl-1 text-[12.5px] transition-colors hover:border-accent">
-      <span className="grid size-5 place-items-center rounded-full bg-[#eef5f3]">
+      <span className="grid size-5 place-items-center rounded-full border border-edge/70 bg-(--chip-disc)">
         <TechIcon icon={icon} name={name} size={13} />
       </span>
       {name}

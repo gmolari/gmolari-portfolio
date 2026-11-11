@@ -47,7 +47,7 @@ export function Inventory({ items, labels }: { items: InventoryItem[]; labels: L
   return (
     <div ref={rootRef} className="grid scroll-mt-24 gap-5 @[720px]:grid-cols-[minmax(0,300px)_minmax(0,1fr)]">
       <div>
-        <div className="grid grid-cols-4 gap-2.5" role="group">
+        <div className="grid grid-cols-3 gap-2.5" role="group">
           {items.map((it, d) => {
             const on = it.id === selected;
             return (
