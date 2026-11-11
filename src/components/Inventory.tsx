@@ -64,7 +64,7 @@ export function Inventory({ items, labels }: { items: InventoryItem[]; labels: L
                 }`}
               >
                 <ProjectIcon rects={it.icon} size={64} className="h-auto w-[78%] transition-transform duration-200 group-hover:scale-110" />
-                <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/25 opacity-0 group-hover:animate-shine group-hover:opacity-100" />
+                <span className="pointer-events-none absolute inset-y-0 left-[-45%] w-1/3 -skew-x-12 bg-white/25 opacity-0 group-hover:animate-shine group-hover:opacity-100" />
                 <span className="sr-only">{it.name}</span>
               </button>
             );

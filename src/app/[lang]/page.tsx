@@ -128,7 +128,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                     )}
                     <span className="pointer-events-none absolute inset-0 bg-[repeating-linear-gradient(0deg,rgb(0_0_0/0.10)_0_1px,transparent_1px_3px)] mix-blend-multiply" />
                     <span className="pointer-events-none absolute inset-0 shadow-[inset_0_0_18px_rgb(0_0_0/0.45)]" />
-                    <span className="pointer-events-none absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/20 opacity-0 group-hover:animate-shine group-hover:opacity-100" />
+                    <span className="pointer-events-none absolute inset-y-0 left-[-45%] w-1/3 -skew-x-12 bg-white/20 opacity-0 group-hover:animate-shine group-hover:opacity-100" />
                   </div>
                   {["top-[3px] left-[3px]", "top-[3px] right-[3px]", "bottom-[3px] left-[3px]", "bottom-[3px] right-[3px]"].map((pos) => (
                     <i key={pos} className={`absolute ${pos} block size-[7px] bg-[#fff3c4] shadow-[1px_1px_0_#8a5a08,inset_-1px_-1px_0_#d99a1a]`} />
@@ -169,7 +169,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
                     <div className="relative h-3.5 overflow-hidden rounded-[3px] border-2 border-frame-in bg-slot shadow-[0_0_0_1px_var(--edge)]">
                       <div className="bar-gloss h-full animate-fill" style={{ width: `${v.value}%`, backgroundColor: v.color }} />
                       <span className="absolute inset-0 bg-[repeating-linear-gradient(90deg,transparent_0_9px,rgb(0_0_0/0.25)_9px_10px)]" />
-                      {senior && <span className="absolute inset-y-0 -left-1/2 w-1/4 -skew-x-12 animate-shine bg-white/40" />}
+                      {senior && <span className="absolute inset-y-0 left-[-45%] w-1/4 -skew-x-12 animate-shine bg-white/40" />}
                     </div>
                     {senior ? (
                       <span className="inline-flex items-center gap-1 rounded-md border-2 border-[#fff3c4] bg-linear-to-b from-[#ffe7a3] to-accent px-2 py-0.5 font-pixel text-[13px] text-[#3a2400] shadow-[0_0_0_2px_var(--frame-in)]">
