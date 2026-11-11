@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>D · Ficha RPG — Molari</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Rubik:wght@400;500&display=swap">
+<style>
+:root{--bg:#10201f;--panel:#16302e;--edge:#2c5a55;--ink:#e6f2ee;--mut:#8fb3ab;--gold:#f0b841;--hp:#e5534b;--mp:#4ba3e5;--xp:#7bd36a;
+  --h:"Chakra Petch",system-ui,sans-serif;--b:"Rubik",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--b);font-size:15px;background-image:linear-gradient(var(--edge) 1px,transparent 1px),linear-gradient(90deg,var(--edge) 1px,transparent 1px);background-size:40px 40px;background-position:-1px -1px;background-color:var(--bg)}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 30% 20%,transparent 30%,var(--bg) 85%);pointer-events:none}
+.wrap{position:relative;max-width:1120px;margin:0 auto;padding:28px 16px 70px;display:grid;grid-template-columns:320px 1fr;gap:20px}
+@media (max-width:860px){.wrap{grid-template-columns:1fr}}
+.pn{background:var(--panel);border:2px solid var(--edge);position:relative;padding:18px;clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+  animation:slide .6s cubic-bezier(.2,1,.3,1) both;animation-delay:calc(var(--i,0)*120ms)}
+@keyframes slide{from{transform:translateX(-30px);opacity:0}}
+.pn h2{font-family:var(--h);font-size:13px;letter-spacing:.14em;color:var(--gold);margin:0 0 14px;text-transform:uppercase}
+.avatar{width:120px;height:120px;margin:4px auto 14px;display:grid;grid-template-columns:repeat(12,1fr);border:2px solid var(--gold);padding:8px;background:#0c1817;animation:breath 3s ease-in-out infinite}
+@keyframes breath{50%{transform:translateY(-4px)}}
+.avatar i{aspect-ratio:1}
+.name{font-family:var(--h);font-size:26px;text-align:center;margin:0;line-height:1.1}
+.cls{text-align:center;color:var(--mut);margin:6px 0 16px}
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:34px 1fr 64px;gap:8px;align-items:center;font-family:var(--h);font-size:12px}
+.bar .t{height:10px;background:#0c1817;border:1px solid var(--edge)}
+.bar .t i{display:block;height:100%;width:0;transition:width 1.2s cubic-bezier(.2,1,.3,1)}
+.bar span:last-child{text-align:right;color:var(--mut);font-variant-numeric:tabular-nums}
+.attrs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.attr{border:1px solid var(--edge);padding:8px 10px;display:flex;justify-content:space-between;align-items:baseline;transition:background .15s,border-color .15s}
+.attr:hover{background:#1d3d3a;border-color:var(--gold)}
+.attr b{font-family:var(--h);font-size:22px;color:var(--gold)}
+.attr span{font-size:12px;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+.tree{position:relative;height:300px;overflow-x:auto}
+.tree svg{position:absolute;inset:0;width:100%;height:100%}
+.node{position:absolute;transform:translate(-50%,-50%);width:58px;height:58px;border:2px solid var(--edge);background:#0c1817;display:grid;place-items:center;font-family:var(--h);font-size:10px;text-align:center;line-height:1.1;cursor:default;
+  clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);transition:transform .2s,background .2s;animation:node .5s cubic-bezier(.3,1.6,.5,1) both;animation-delay:calc(.6s + var(--d)*70ms)}
+@keyframes node{from{transform:translate(-50%,-50%) scale(0)}}
+.node.on{background:#2a5a3a;color:#fff}
+.node.max{background:var(--gold);color:#1c1300}
+.node:hover{transform:translate(-50%,-50%) scale(1.18)}
+.tip{position:absolute;pointer-events:none;background:#0c1817;border:1px solid var(--gold);padding:8px 10px;font-size:13px;max-width:220px;z-index:5;opacity:0;transition:opacity .12s}
+.quests{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.q{display:grid;grid-template-columns:22px 1fr auto;gap:12px;align-items:start;padding:10px;border:1px solid var(--edge);transition:transform .15s,border-color .15s}
+.q:hover{transform:translateX(6px);border-color:var(--gold)}
+.chk{width:18px;height:18px;border:2px solid var(--xp);display:grid;place-items:center;color:var(--xp);font-size:12px;margin-top:2px}
+.q b{font-family:var(--h);font-size:16px}
+.q p{margin:2px 0 0;color:var(--mut)}
+.q .rw{font-family:var(--h);font-size:12px;color:var(--gold);white-space:nowrap}
+.inv{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.it{border:2px solid var(--edge);padding:10px;background:#0c1817;transition:transform .15s,box-shadow .15s;position:relative}
+.it:hover{transform:translateY(-4px)}
+.it.leg{border-color:#ff9f43}.it.leg:hover{box-shadow:0 0 0 2px #ff9f43}
+.it.epi{border-color:#b98cff}.it.epi:hover{box-shadow:0 0 0 2px #b98cff}
+.it.rar{border-color:#4ba3e5}.it.rar:hover{box-shadow:0 0 0 2px #4ba3e5}
+.it small{font-family:var(--h);font-size:10px;letter-spacing:.1em}
+.it.leg small{color:#ff9f43}.it.epi small{color:#b98cff}.it.rar small{color:#4ba3e5}
+.it b{display:block;font-family:var(--h);font-size:15px;margin-top:2px}
+.col{display:grid;gap:20px;align-content:start}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="col">
+    <section class="pn" style="--i:0">
+      <div class="avatar" id="av" aria-hidden="true"></div>
+      <h1 class="name">Guilherme Molari</h1>
+      <div class="cls">Classe: Engenheiro Full Stack · Especialização: Gamificação · Londrina, BR</div>
+      <div class="bars">
+        <div class="bar"><span>HP</span><div class="t"><i style="background:var(--hp)" data-w="92"></i></div><span>café 92%</span></div>
+        <div class="bar"><span>MP</span><div class="t"><i style="background:var(--mp)" data-w="80"></i></div><span>foco 80%</span></div>
+        <div class="bar"><span>XP</span><div class="t"><i style="background:var(--xp)" data-w="68"></i></div><span>LV SENIOR</span></div>
+      </div>
+    </section>
+    <section class="pn" style="--i:1">
+      <h2>Atributos</h2>
+      <div class="attrs">
+        <div class="attr"><span>Frontend</span><b>19</b></div><div class="attr"><span>Game dev</span><b>18</b></div>
+        <div class="attr"><span>Backend</span><b>15</b></div><div class="attr"><span>Liderança</span><b>16</b></div>
+        <div class="attr"><span>Mobile</span><b>14</b></div><div class="attr"><span>IA / MCP</span><b>17</b></div>
+      </div>
+    </section>
+  </div>
+  <div class="col">
+    <section class="pn" style="--i:2">
+      <h2>Árvore de skills · passe o mouse</h2>
+      <div class="tree" id="tree"><svg id="lines"></svg><div class="tip" id="tip"></div></div>
+    </section>
+    <section class="pn" style="--i:3">
+      <h2>Quest log</h2>
+      <ul class="quests">
+        <li class="q"><span class="chk">✓</span><div><b>Liderar a guilda · Ana Gaming</b><p>Tech Lead de 5 devs front e back: padrões, code review, mentoria e entregas.</p></div><span class="rw">+ LIDERANÇA</span></li>
+        <li class="q"><span class="chk">✓</span><div><b>Construir o loop · Supernova Gaming</b><p>Pioneiro no front da Supernova Bet e autor do loop de gamificação.</p></div><span class="rw">+ GAME DEV</span></li>
+        <li class="q"><span class="chk">✓</span><div><b>Reforçar o reino · Multibet</b><p>Multi-verso, backoffice de indicação, popups e cadastro de minigames.</p></div><span class="rw">+ FRONTEND</span></li>
+      </ul>
+    </section>
+    <section class="pn" style="--i:4">
+      <h2>Inventário · projetos</h2>
+      <div class="inv">
+        <div class="it leg"><small>LENDÁRIO</small><b>Gamification Loop</b></div>
+        <div class="it leg"><small>LENDÁRIO</small><b>Motor de jogos</b></div>
+        <div class="it epi"><small>ÉPICO</small><b>Supernova Bet</b></div>
+        <div class="it epi"><small>ÉPICO</small><b>Mosaico Neon</b></div>
+        <div class="it rar"><small>RARO</small><b>VortexVolley</b></div>
+        <div class="it rar"><small>RARO</small><b>CityBuilder</b></div>
+      </div>
+    </section>
+  </div>
+</div>
+<script>
+/* avatar 12x12 */
+const A=["....hhhh....","...hhhhhh...","..hhhhhhhh..","..hssssssh..","..sksssksh..","..ssssssss..","...ssmmss...","....ssss....","..bbbbbbbb..",".bbbbwwbbbb.",".bbbbwwbbbb.",".bb.bbbb.bb."],C={h:"#3b2416",s:"#f0c39b",k:"#111",m:"#b5654a",b:"#2d8a7a",w:"#e6f2ee"};
+document.getElementById('av').innerHTML=A.join('').split('').map(c=>`<i style="background:${C[c]||'transparent'}"></i>`).join('');
+setTimeout(()=>document.querySelectorAll('.bar i').forEach(b=>b.style.width=b.dataset.w+'%'),400);
+/* skill tree */
+const N=[["ts","TypeScript",50,12,"max","Base de tudo."],["react","React",25,38,"max","Componentes reutilizáveis, design systems."],["node","Node",75,38,"on","APIs, NestJS, Express."],
+["next","Next.js",12,66,"max","App Router, SSR/SSG, performance e SEO."],["pixi","PixiJS",34,66,"max","Minigames, cenas 2D, motor de jogos."],["rn","React Native",25,90,"on","Expo, apps mobile."],
+["nest","NestJS",64,66,"on","APIs com tempo real."],["cs","C# / .NET",86,66,"on","ASP.NET, Entity Framework."],["db","MySQL · Mongo",75,90,"on","Modelagem e queries."],["ai","IA · MCP",50,90,"max","Claude Code, agents e automação."]];
+const L=[["ts","react"],["ts","node"],["react","next"],["react","pixi"],["react","rn"],["node","nest"],["node","cs"],["nest","db"],["cs","db"],["ts","ai"]];
+const tree=document.getElementById('tree'),svg=document.getElementById('lines'),tip=document.getElementById('tip');
+N.forEach(([id,l,x,y,st,d],i)=>{const n=document.createElement('div');n.className='node '+st;n.style.left=x+'%';n.style.top=y+'%';n.style.setProperty('--d',i);n.textContent=l;
+  n.onmouseenter=()=>{tip.innerHTML=`<b>${l}</b>${st==='max'?' · MAX':''}<br>${d}`;tip.style.left=Math.min(x,70)+'%';tip.style.top=(y>50?y-30:y+14)+'%';tip.style.opacity=1};n.onmouseleave=()=>tip.style.opacity=0;tree.append(n)});
+function lines(){const r=tree.getBoundingClientRect();svg.setAttribute('viewBox',`0 0 ${r.width} ${r.height}`);
+  svg.innerHTML=L.map(([a,b])=>{const A=N.find(n=>n[0]===a),B=N.find(n=>n[0]===b);return `<line x1="${A[2]/100*r.width}" y1="${A[3]/100*r.height}" x2="${B[2]/100*r.width}" y2="${B[3]/100*r.height}" stroke="#2c5a55" stroke-width="3" stroke-dasharray="6 5"><animate attributeName="stroke-dashoffset" from="22" to="0" dur="1s" repeatCount="indefinite"/></line>`}).join('')}
+lines();addEventListener('resize',lines);
+</script>
+</body>
+</html>
