@@ -21,12 +21,12 @@ export default function GlobalNotFound() {
         <script dangerouslySetInnerHTML={{ __html: theme }} />
       </head>
       <body style={{ display: "grid", placeItems: "center", padding: 24 }}>
-        <main className="window" style={{ textAlign: "center", maxWidth: 460 }}>
+        <main className="window p-6" style={{ textAlign: "center", maxWidth: 460 }}>
           <PixelArt name="chest" scale={5} />
-          <h1 className="pixel" style={{ fontSize: 40, margin: "12px 0 4px" }}>404</h1>
+          <h1 className="font-pixel" style={{ fontSize: 40, margin: "12px 0 4px" }}>404</h1>
           <p style={{ margin: "0 0 4px" }}>This room is empty. Nothing to loot here.</p>
           <p style={{ margin: "0 0 18px", color: "var(--muted)" }}>Esta sala está vazia. Nada para saquear aqui.</p>
-          <Link className="chip-btn primary" href="/">
+          <Link className="btn-pixel btn-gold" href="/">
             ◂ Home
           </Link>
         </main>

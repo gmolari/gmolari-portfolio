@@ -3,6 +3,7 @@
  * Every string that is shown to visitors exists in EN and PT.
  */
 import type { Locale } from "@/lib/i18n";
+import type { GlyphName } from "@/components/Glyph";
 
 export type T = Record<Locale, string>;
 export type Rarity = "legendary" | "epic" | "rare" | "uncommon";
@@ -23,6 +24,8 @@ export const person = {
   github: "https://github.com/gmolari",
   githubHandle: "gmolari",
   linkedin: "https://www.linkedin.com/in/guilherme-molari-5203a8236/",
+  /** Path under /public. null = show the pixel avatar instead. */
+  photo: "/guilherme-molari.jpg" as string | null,
   jobTitle: { en: "Senior Software Engineer", pt: "Engenheiro de Software Sênior" } as T,
   cls: { en: "Full Stack Engineer", pt: "Engenheiro Full Stack" } as T,
   spec: { en: "Web, mobile & games", pt: "Web, mobile & jogos" } as T,
@@ -38,81 +41,158 @@ export const person = {
 
 /** Character sheet vitals. Playful on purpose; the values are flavour, not metrics. */
 export const vitals = [
-  { key: "HP", value: 92, label: { en: "coffee", pt: "café" } as T, color: "var(--hp)" },
-  { key: "MP", value: 80, label: { en: "focus", pt: "foco" } as T, color: "var(--mp)" },
-  { key: "XP", value: 70, label: { en: "senior", pt: "sênior" } as T, color: "var(--xp)" },
+  { key: "HP", value: 92, icon: "heart" as GlyphName, label: { en: "coffee", pt: "café" } as T, color: "var(--hp)" },
+  { key: "MP", value: 80, icon: "mana" as GlyphName, label: { en: "focus", pt: "foco" } as T, color: "var(--mp)" },
+  { key: "XP", value: 100, icon: "star" as GlyphName, label: { en: "Senior", pt: "Sênior" } as T, color: "var(--xp)" },
 ];
 
 export const attributes = [
-  { label: { en: "Frontend", pt: "Frontend" } as T, value: 19 },
-  { label: { en: "Backend", pt: "Backend" } as T, value: 17 },
-  { label: { en: "Architecture", pt: "Arquitetura" } as T, value: 17 },
-  { label: { en: "Leadership", pt: "Liderança" } as T, value: 16 },
-  { label: { en: "Mobile", pt: "Mobile" } as T, value: 15 },
-  { label: { en: "Game dev", pt: "Game dev" } as T, value: 17 },
+  { icon: "monitor" as GlyphName, label: { en: "Frontend", pt: "Frontend" } as T, value: 19 },
+  { icon: "server" as GlyphName, label: { en: "Backend", pt: "Backend" } as T, value: 17 },
+  { icon: "temple" as GlyphName, label: { en: "Architecture", pt: "Arquitetura" } as T, value: 17 },
+  { icon: "crown" as GlyphName, label: { en: "Leadership", pt: "Liderança" } as T, value: 16 },
+  { icon: "phone" as GlyphName, label: { en: "Mobile", pt: "Mobile" } as T, value: 15 },
+  { icon: "pad" as GlyphName, label: { en: "Game dev", pt: "Game dev" } as T, value: 17 },
 ];
+
+export type SkillIcon =
+  | "typescript" | "react" | "nextjs" | "nodejs" | "nestjs" | "dotnet" | "postgresql"
+  | "pixijs" | "expo" | "kotlin" | "capacitor" | "claude" | "figma";
 
 export type SkillNode = {
   id: string;
   label: string;
-  x: number; // % of the tree width
-  y: number; // % of the tree height
-  level: "max" | "on";
+  icon: SkillIcon;
+  /** Position inside the tree's inner box, in % (0–100). */
+  x: number;
+  y: number;
+  /** 1–5 */
+  level: number;
+  category: T;
   note: T;
+  /** Project ids from `projects` where this skill was used. */
+  usedIn: string[];
+  /** Extra tools that come with the skill. */
+  extras: string[];
 };
 
+const cat = {
+  core: { en: "Core", pt: "Base" },
+  front: { en: "Frontend", pt: "Frontend" },
+  back: { en: "Backend", pt: "Backend" },
+  data: { en: "Data", pt: "Dados" },
+  mobile: { en: "Mobile", pt: "Mobile" },
+  game: { en: "Games", pt: "Jogos" },
+  tools: { en: "Workflow", pt: "Fluxo de trabalho" },
+} satisfies Record<string, T>;
+
 export const skills: SkillNode[] = [
-  { id: "ts", label: "TypeScript", x: 50, y: 10, level: "max", note: { en: "The base of everything I ship.", pt: "A base de tudo que eu entrego." } },
-  { id: "react", label: "React", x: 24, y: 34, level: "max", note: { en: "Component libraries, design systems, performance.", pt: "Bibliotecas de componentes, design systems, performance." } },
-  { id: "node", label: "Node.js", x: 76, y: 34, level: "on", note: { en: "REST APIs, real-time with Socket.IO, integrations with payment and third-party providers.", pt: "APIs REST, tempo real com Socket.IO, integrações com provedores de pagamento e terceiros." } },
-  { id: "next", label: "Next.js", x: 9, y: 62, level: "max", note: { en: "App Router, SSR/SSG, SEO, Core Web Vitals.", pt: "App Router, SSR/SSG, SEO, Core Web Vitals." } },
-  { id: "pixi", label: "PixiJS", x: 26, y: 62, level: "max", note: { en: "Minigames, 2D scenes, my own game engine.", pt: "Minigames, cenas 2D, meu próprio motor de jogos." } },
-  { id: "rn", label: "React Native", x: 17, y: 88, level: "on", note: { en: "Expo apps; also Kotlin and Java on Android.", pt: "Apps em Expo; também Kotlin e Java no Android." } },
-  { id: "capacitor", label: "Capacitor", x: 36, y: 88, level: "on", note: { en: "One codebase for web, Android and iOS games.", pt: "Um código para jogos web, Android e iOS." } },
-  { id: "nest", label: "NestJS", x: 62, y: 62, level: "on", note: { en: "JWT auth, roles, WebSockets, Prisma.", pt: "Auth JWT, papéis, WebSockets, Prisma." } },
-  { id: "dotnet", label: "C# · .NET", x: 88, y: 62, level: "on", note: { en: "ASP.NET and Entity Framework.", pt: "ASP.NET e Entity Framework." } },
-  { id: "db", label: "SQL · Mongo", x: 75, y: 88, level: "on", note: { en: "PostgreSQL, MySQL, MongoDB; Prisma and Drizzle.", pt: "PostgreSQL, MySQL, MongoDB; Prisma e Drizzle." } },
-  { id: "ai", label: "AI · MCP", x: 54, y: 88, level: "max", note: { en: "Claude Code, agents and MCP integrations for automation.", pt: "Claude Code, agentes e integrações MCP para automação." } },
+  {
+    id: "ts", label: "TypeScript", icon: "typescript", x: 50, y: 0, level: 5, category: cat.core,
+    note: { en: "The language behind almost everything I ship, front and back. Strict types, shared contracts between API and UI, Zod for runtime validation.", pt: "A linguagem por trás de quase tudo que eu entrego, no front e no back. Tipagem estrita, contratos compartilhados entre API e UI, Zod para validação em runtime." },
+    usedIn: ["supernova-bet", "gamification-loop", "vortexvolley", "bigette", "game-lab"], extras: ["JavaScript", "Zod"],
+  },
+  {
+    id: "react", label: "React", icon: "react", x: 25, y: 26, level: 5, category: cat.front,
+    note: { en: "Component libraries and design systems built from Figma, state with Zustand and React Query, and a lot of performance work on heavy, real-time screens.", pt: "Bibliotecas de componentes e design systems a partir do Figma, estado com Zustand e React Query, e muito trabalho de performance em telas pesadas e em tempo real." },
+    usedIn: ["supernova-bet", "gamification-loop", "minigames", "bigette"], extras: ["Zustand", "React Query", "Framer Motion"],
+  },
+  {
+    id: "next", label: "Next.js", icon: "nextjs", x: 6, y: 54, level: 5, category: cat.front,
+    note: { en: "App Router, server components, SSR and SSG, SEO and Core Web Vitals. This portfolio runs on Next.js 16.", pt: "App Router, server components, SSR e SSG, SEO e Core Web Vitals. Este portfólio roda em Next.js 16." },
+    usedIn: ["supernova-bet", "gamification-loop", "bigette", "minigames"], extras: ["Tailwind CSS", "Vercel"],
+  },
+  {
+    id: "figma", label: "Figma", icon: "figma", x: 25, y: 82, level: 4, category: cat.tools,
+    note: { en: "I work straight from Figma files with designers: tokens, components and pixel-accurate implementation.", pt: "Trabalho direto dos arquivos do Figma com o design: tokens, componentes e implementação fiel ao pixel." },
+    usedIn: ["supernova-bet", "gamification-loop"], extras: ["Design tokens", "Handoff"],
+  },
+  {
+    id: "pixi", label: "PixiJS", icon: "pixijs", x: 42, y: 54, level: 5, category: cat.game,
+    note: { en: "WebGL 2D for minigames, slot reels and full casual games. I wrote my own engine on top of it for three games.", pt: "WebGL 2D para minigames, rolos de slot e jogos casuais completos. Escrevi meu próprio motor em cima dele para três jogos." },
+    usedIn: ["gamification-loop", "game-lab", "sweepstakes", "minigames"], extras: ["Canvas", "WebGL"],
+  },
+  {
+    id: "capacitor", label: "Capacitor", icon: "capacitor", x: 50, y: 82, level: 4, category: cat.mobile,
+    note: { en: "One TypeScript codebase shipped to web, Android and iOS, with haptics, preferences and AdMob.", pt: "Um único código TypeScript publicado na web, no Android e no iOS, com vibração, preferências e AdMob." },
+    usedIn: ["game-lab"], extras: ["Vite", "AdMob"],
+  },
+  {
+    id: "rn", label: "React Native", icon: "expo", x: 6, y: 100, level: 4, category: cat.mobile,
+    note: { en: "Expo apps with Expo Router, real-time updates over Socket.IO and secure token storage.", pt: "Apps em Expo com Expo Router, atualizações em tempo real via Socket.IO e armazenamento seguro de tokens." },
+    usedIn: ["vortexvolley"], extras: ["Expo Router", "Reanimated"],
+  },
+  {
+    id: "kotlin", label: "Kotlin · Java", icon: "kotlin", x: 34, y: 100, level: 3, category: cat.mobile,
+    note: { en: "Native Android work and JVM game modding.", pt: "Android nativo e modding de jogos na JVM." },
+    usedIn: ["citybuilder"], extras: ["Fabric", "Gradle"],
+  },
+  {
+    id: "node", label: "Node.js", icon: "nodejs", x: 75, y: 26, level: 4, category: cat.back,
+    note: { en: "REST APIs, real-time with Socket.IO, and integrations with payment and third-party providers.", pt: "APIs REST, tempo real com Socket.IO e integrações com provedores de pagamento e terceiros." },
+    usedIn: ["vortexvolley", "supernova-bet"], extras: ["Express", "Socket.IO"],
+  },
+  {
+    id: "nest", label: "NestJS", icon: "nestjs", x: 62, y: 54, level: 4, category: cat.back,
+    note: { en: "Modular APIs with JWT access and refresh tokens, roles, WebSocket gateways, rate limiting and validation.", pt: "APIs modulares com JWT (access e refresh), papéis, gateways WebSocket, rate limiting e validação." },
+    usedIn: ["vortexvolley"], extras: ["Passport", "class-validator"],
+  },
+  {
+    id: "dotnet", label: "C# · .NET", icon: "dotnet", x: 94, y: 54, level: 3, category: cat.back,
+    note: { en: "ASP.NET Web APIs and CRUD back ends with Entity Framework and MySQL.", pt: "Web APIs e back ends CRUD em ASP.NET com Entity Framework e MySQL." },
+    usedIn: [], extras: ["ASP.NET", "Entity Framework"],
+  },
+  {
+    id: "db", label: "SQL · Mongo", icon: "postgresql", x: 78, y: 82, level: 4, category: cat.data,
+    note: { en: "PostgreSQL, MySQL and MongoDB. Schema design and migrations with Prisma and Drizzle.", pt: "PostgreSQL, MySQL e MongoDB. Modelagem e migrations com Prisma e Drizzle." },
+    usedIn: ["vortexvolley", "bigette"], extras: ["Prisma", "Drizzle", "MySQL", "MongoDB"],
+  },
+  {
+    id: "ai", label: "AI · MCP", icon: "claude", x: 94, y: 100, level: 5, category: cat.tools,
+    note: { en: "Claude Code, custom agents, skills and MCP servers wired into my daily workflow to automate reviews, assets and repetitive work.", pt: "Claude Code, agentes, skills e servidores MCP no meu dia a dia para automatizar revisões, assets e trabalho repetitivo." },
+    usedIn: ["game-lab"], extras: ["Claude Code", "MCP", "Agents"],
+  },
 ];
 
 export const skillLinks: [string, string][] = [
-  ["ts", "react"], ["ts", "node"], ["react", "next"], ["react", "pixi"], ["react", "rn"],
-  ["pixi", "capacitor"], ["node", "nest"], ["node", "dotnet"], ["nest", "db"], ["dotnet", "db"], ["ts", "ai"],
+  ["ts", "react"], ["ts", "node"], ["react", "next"], ["react", "pixi"], ["react", "figma"], ["next", "rn"],
+  ["pixi", "capacitor"], ["capacitor", "kotlin"], ["node", "nest"], ["node", "dotnet"], ["nest", "db"],
+  ["dotnet", "db"], ["db", "ai"], ["ts", "ai"],
 ];
 
 export const quests = [
   {
     id: "ana",
-    title: { en: "Lead the party", pt: "Liderar a party" } as T,
     org: "Ana Gaming",
+    badge: "AG",
     role: { en: "Technical Lead", pt: "Tech Lead" } as T,
     text: {
       en: "Led a team of five front-end and back-end developers. Owned architecture decisions, delivery planning, coding standards, code review and technical mentoring.",
       pt: "Liderei um time de cinco devs front-end e back-end. Responsável por decisões de arquitetura, planejamento de entregas, padrões de código, code review e mentoria técnica.",
     } as T,
-    reward: { en: "+ Leadership + Architecture", pt: "+ Liderança + Arquitetura" } as T,
+    tags: { en: ["Leadership", "Architecture", "Code review"], pt: ["Liderança", "Arquitetura", "Code review"] },
   },
   {
     id: "supernova",
-    title: { en: "Build the platform", pt: "Construir a plataforma" } as T,
     org: "Supernova Gaming",
+    badge: "SG",
     role: { en: "Senior Front-end Engineer", pt: "Engenheiro Front-end Sênior" } as T,
     text: {
       en: "One of the first engineers on the Supernova Bet platform: real-time features, REST and payment provider integrations, back offices and a shared component library. Later took ownership of the gamification layer and built it almost entirely on my own.",
       pt: "Um dos pioneiros na plataforma Supernova Bet: recursos em tempo real, integrações REST e com provedores de pagamento, backoffices e uma biblioteca de componentes compartilhada. Depois assumi a camada de gamificação e a construí praticamente sozinho.",
     } as T,
-    reward: { en: "+ Frontend + Backend", pt: "+ Frontend + Backend" } as T,
+    tags: { en: ["Next.js", "Real time", "Payments", "Gamification"], pt: ["Next.js", "Tempo real", "Pagamentos", "Gamificação"] },
   },
   {
     id: "multibet",
-    title: { en: "Reinforce the kingdom", pt: "Reforçar o reino" } as T,
     org: "Multibet",
+    badge: "MB",
     role: { en: "Front-end Engineer", pt: "Engenheiro Front-end" } as T,
     text: {
       en: "Built features across the product and internal tools: Multi-verso, the refer-a-friend back office, admin tools for popups and minigames, and landing pages, working from Figma with React Query and Zustand.",
       pt: "Desenvolvi funcionalidades do produto e de ferramentas internas: Multi-verso, backoffice de indicação, painéis de cadastro de popups e minigames e landing pages, partindo do Figma com React Query e Zustand.",
     } as T,
-    reward: { en: "+ Product", pt: "+ Produto" } as T,
+    tags: { en: ["React", "Back offices", "Landing pages"], pt: ["React", "Backoffices", "Landing pages"] },
   },
 ];
 
@@ -219,22 +299,22 @@ export const projects: Project[] = [
   },
   {
     id: "game-lab",
-    name: "Game Lab Engine",
+    name: "Ad Monetization Engine",
     sprite: "potion",
     rarity: "legendary",
-    context: { en: "R&D lab", pt: "Laboratório de P&D" },
+    context: { en: "R&D lab · casual mobile games", pt: "Laboratório de P&D · jogos mobile casuais" },
     role: { en: "Solo: engine and three games", pt: "Solo: motor e três jogos" },
     summary: {
-      en: "A shared engine plus three casual games (Mosaico Neon, Alquimia das Cores and Parafusa!) for web, Android and iOS.",
-      pt: "Um motor compartilhado e três jogos casuais (Mosaico Neon, Alquimia das Cores e Parafusa!) para web, Android e iOS.",
+      en: "An ad monetization engine for casual mobile games. For every player and moment it decides whether to show a rewarded ad, an interstitial or a banner, so the studio earns from ads without burning its players.",
+      pt: "Um motor de monetização por anúncios para jogos mobile casuais. Para cada jogador e momento ele decide se mostra um anúncio recompensado, um intersticial ou um banner, para o estúdio faturar com anúncios sem queimar os jogadores.",
     },
     how: {
-      en: "The engine decides how much generated content helps the player (the dealer), when to offer revive, interstitial or banner (the ad policy), how mature a player is, and enforces wellbeing protections. It also ships the whole app shell: title screen, HUD, modals, sound and haptics. Each game is a block puzzle, a liquid sort or a screw puzzle on top of it.",
-      pt: "O motor decide quanto o conteúdo gerado ajuda o jogador (o dealer), quando oferecer revive, intersticial ou banner (a policy de anúncios), qual a maturidade do jogador, e aplica proteções de bem-estar. Ele também entrega a casca do app: tela de título, HUD, modais, som e vibração. Cada jogo (block puzzle, ordenar líquidos, parafusos) roda em cima dele.",
+      en: "Tuned like a product, not code: frequency caps, a grace period for new players, interstitials only at game over, rewarded revives, presets (recommended, aggressive, no ads), remote config and a live log that explains every decision. AdMob with automatic fallback to cross-promotion house ads, an ad-free purchase, consent (UMP and LGPD) and protections for minors come built in.",
+      pt: "Ajustado como produto, não como código: limite de frequência, carência para jogadores novos, intersticial só no game over, revive recompensado, predefinições (recomendado, agressivo, sem anúncios), remote config e um registro ao vivo que explica cada decisão. AdMob com fallback automático para house ads de promoção cruzada, compra para remover anúncios, consentimento (UMP e LGPD) e proteção para menores já vêm prontos.",
     },
     purpose: {
-      en: "Study game design and monetization with real, playable products instead of slides.",
-      pt: "Estudar game design e monetização com produtos jogáveis de verdade, não com slides.",
+      en: "Grow ad revenue while keeping retention healthy, and launch new games on a ready-made monetization stack. Mosaico Neon, Alquimia das Cores and Parafusa! run on it, on web, Android and iOS.",
+      pt: "Aumentar a receita com anúncios mantendo a retenção saudável e lançar novos jogos sobre uma base de monetização pronta. Mosaico Neon, Alquimia das Cores e Parafusa! rodam nele, na web, no Android e no iOS.",
     },
     stack: ["TypeScript", "PixiJS v8", "Vite", "Capacitor", "AdMob"],
   },
@@ -315,11 +395,17 @@ export const ui = {
     spec: "Specialization",
     attributes: "Attributes",
     skillTree: "Skill tree",
-    skillHint: "hover or focus a node",
-    questLog: "Quest log",
+    skillHint: "hover or tap a rune",
+    usedIn: "Used in",
+    rank: "Rank",
+    treeControls: { zoomIn: "Zoom in", zoomOut: "Zoom out", reset: "Recenter", help: "Drag to move · scroll or pinch to zoom" },
+    alsoWith: "Comes with",
+    level: "Level",
+    questLog: "Quest log · Work experience",
     completed: "Completed",
     inventory: "Inventory",
     inventoryHint: "pick an item to inspect it",
+    inventoryTitle: "Inventory · Projects",
     howItWorks: "How it works",
     purpose: "Purpose",
     stack: "Stack",
@@ -349,11 +435,17 @@ export const ui = {
     spec: "Especialização",
     attributes: "Atributos",
     skillTree: "Árvore de skills",
-    skillHint: "passe o mouse ou foque um nó",
-    questLog: "Quest log",
+    skillHint: "passe o mouse ou toque numa runa",
+    usedIn: "Usado em",
+    rank: "Rank",
+    treeControls: { zoomIn: "Aproximar", zoomOut: "Afastar", reset: "Centralizar", help: "Arraste para mover · role ou pince para zoom" },
+    alsoWith: "Junto com",
+    level: "Nível",
+    questLog: "Quest log · Experiência profissional",
     completed: "Concluída",
     inventory: "Inventário",
     inventoryHint: "escolha um item para inspecionar",
+    inventoryTitle: "Inventário · Projetos",
     howItWorks: "Como funciona",
     purpose: "Finalidade",
     stack: "Stack",
