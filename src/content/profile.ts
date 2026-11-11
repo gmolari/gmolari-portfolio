@@ -196,14 +196,14 @@ export const projects: Project[] = [
   },
   {
     id: "sweepstakes",
-    name: "Sweepstakes Social Casino",
+    name: "Sweepstakes",
     sprite: "star",
     rarity: "epic",
     context: { en: "R&D lab", pt: "Laboratório de P&D" },
     role: { en: "Research and prototype", pt: "Pesquisa e protótipo" },
     summary: {
-      en: "Market and legal research on sweepstakes casinos plus an original social casino prototype.",
-      pt: "Pesquisa de mercado e jurídica sobre cassinos sweepstakes e um protótipo original de cassino social.",
+      en: "Market and legal research on sweepstakes casinos plus an original sweepstakes casino prototype.",
+      pt: "Pesquisa de mercado e jurídica sobre cassinos sweepstakes e um protótipo original de cassino sweepstakes.",
     },
     how: {
       en: "Eight original slot games on one parametric reel engine in WebGL, dual currency, free spins, VIP tiers, season pass, daily wheel, missions, responsible-gaming tools and a simulated geoblock and KYC flow. All art is drawn in code and runs on web and Android.",
