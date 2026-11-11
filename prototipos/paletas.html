@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paletas — Molari</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Chakra+Petch:wght@500;700&family=Rubik:wght@400;500&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+:root{--page:#f1f2f4;--page-ink:#15181d;--page-mut:#5b6170;--page-line:#d5d8de}
+[data-theme="dark"]{--page:#0e1014;--page-ink:#eceef2;--page-mut:#9097a6;--page-line:#272b33;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--page-ink);font-family:Rubik,system-ui,sans-serif;font-size:15px}
+.top{position:sticky;top:0;z-index:5;background:var(--page);border-bottom:1px solid var(--page-line)}
+.top-in{max-width:1240px;margin:0 auto;padding:14px 16px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+h1{font-family:"Press Start 2P",monospace;font-size:16px;margin:0;line-height:1.5}
+.toggle{font-family:"Press Start 2P",monospace;font-size:10px;display:flex;align-items:center;gap:10px;background:var(--page-ink);color:var(--page);border:0;padding:10px 14px;cursor:pointer;box-shadow:0 4px 0 var(--page-mut);transition:transform .08s,box-shadow .08s}
+.toggle:hover{transform:translateY(-2px);box-shadow:0 6px 0 var(--page-mut)}
+.toggle:active{transform:translateY(4px);box-shadow:0 0 0 var(--page-mut)}
+.toggle .ico{width:16px;height:16px;display:grid;grid-template-columns:repeat(4,1fr);transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+[data-theme="dark"] .toggle .ico{transform:rotate(180deg)}
+.toggle .ico i{background:currentColor}
+.toggle .ico i:nth-child(1),.toggle .ico i:nth-child(4),.toggle .ico i:nth-child(13),.toggle .ico i:nth-child(16){background:transparent}
+.intro{max-width:1240px;margin:0 auto;padding:18px 16px 0;color:var(--page-mut);max-width:1240px}
+.grid{max-width:1240px;margin:0 auto;padding:18px 16px 60px;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,560px),1fr));gap:22px}
+.pal{border:1px solid var(--page-line);background:var(--page);animation:in .5s cubic-bezier(.2,1,.3,1) both;animation-delay:calc(var(--i)*80ms)}
+@keyframes in{from{transform:translateY(16px);opacity:0}}
+.pal header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:14px 16px;border-bottom:1px solid var(--page-line)}
+.pal h2{font-family:"Press Start 2P",monospace;font-size:12px;margin:0;line-height:1.6}
+.pal header span{color:var(--page-mut);font-size:13px}
+.body{display:grid;grid-template-columns:1fr 1fr;gap:0}
+@media (max-width:640px){.body{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+td{padding:5px 10px;border-bottom:1px solid var(--page-line);vertical-align:middle}
+td.sw{width:34px}
+td.sw i{display:block;width:22px;height:22px;border:1px solid #0003}
+td.hex{font-family:"JetBrains Mono",monospace;color:var(--page-mut)}
+.mini{background:var(--bg);color:var(--ink);padding:16px;display:grid;gap:12px;align-content:start;
+  background-image:linear-gradient(var(--edge) 1px,transparent 1px),linear-gradient(90deg,var(--edge) 1px,transparent 1px);background-size:24px 24px}
+.card{background:var(--panel);border:2px solid var(--edge);padding:12px;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+.who{display:flex;gap:12px;align-items:center}
+.av{width:44px;height:44px;display:grid;grid-template-columns:repeat(8,1fr);border:2px solid var(--accent);padding:3px;background:var(--slot)}
+.av i{aspect-ratio:1}
+.nm{font-family:"Chakra Petch",sans-serif;font-weight:700;font-size:17px;line-height:1.1}
+.cl{font-size:12px;color:var(--muted)}
+.bar{display:grid;grid-template-columns:24px 1fr;gap:6px;align-items:center;font-family:"Chakra Petch",sans-serif;font-size:11px;margin-top:6px}
+.bar div{height:8px;background:var(--slot);border:1px solid var(--edge)}
+.bar div i{display:block;height:100%}
+.lbl{font-family:"Chakra Petch",sans-serif;font-size:11px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.attrs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}
+.attr{border:1px solid var(--edge);padding:5px 7px;display:flex;justify-content:space-between;align-items:baseline;font-size:11px;color:var(--muted);transition:border-color .15s,transform .15s}
+.attr:hover{border-color:var(--accent);transform:translateY(-2px)}
+.attr b{font-family:"Chakra Petch",sans-serif;font-size:16px;color:var(--accent)}
+.items{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.it{border:2px solid var(--c);background:var(--slot);padding:6px 8px;transition:transform .15s,box-shadow .15s}
+.it:hover{transform:translateY(-3px);box-shadow:0 0 0 2px var(--c)}
+.it small{font-family:"Chakra Petch",sans-serif;font-size:9px;letter-spacing:.1em;color:var(--c)}
+.it b{display:block;font-family:"Chakra Petch",sans-serif;font-size:13px}
+.btn{justify-self:start;font-family:"Press Start 2P",monospace;font-size:9px;background:var(--accent);color:var(--on-accent);border:2px solid var(--ink);padding:8px 10px;box-shadow:0 3px 0 var(--ink);cursor:pointer}
+.btn:active{transform:translateY(3px);box-shadow:none}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in">
+  <h1>PALETAS DA FICHA</h1>
+  <button class="toggle" id="tg" type="button"><span class="ico" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span id="tgl">TEMA CLARO</span></button>
+</div></div>
+<p class="intro">Seis paletas, cada uma com versão clara e escura. O botão no topo troca o tema com a animação que vai para o site (de verdade, a partir do ponto do clique). Passe o mouse nos atributos e itens para ver o hover.</p>
+<div class="grid" id="grid"></div>
+<script>
+const ROLES=[["bg","Fundo"],["panel","Painéis"],["slot","Slots / trilhas"],["edge","Bordas e grade"],["ink","Texto"],["muted","Texto secundário"],["accent","Destaque (títulos, números)"],["hp","HP · erro"],["mp","MP · links"],["xp","XP · sucesso"],["leg","Raridade lendária"],["epi","Raridade épica"]];
+const P=[
+ {n:"1 · FLORESTA TEAL",d:"a do protótipo D",
+  dark:{bg:"#10201f",panel:"#16302e",slot:"#0c1817",edge:"#2c5a55",ink:"#e6f2ee",muted:"#8fb3ab",accent:"#f0b841",hp:"#e5534b",mp:"#4ba3e5",xp:"#7bd36a",leg:"#ff9f43",epi:"#b98cff",onAccent:"#1c1300"},
+  light:{bg:"#e9f2ef",panel:"#ffffff",slot:"#dbe9e5",edge:"#b6d2cb",ink:"#11302c",muted:"#4c6d66",accent:"#a86f00",hp:"#c43c34",mp:"#1f6fb0",xp:"#3a8a2c",leg:"#c45f00",epi:"#7a4cc7",onAccent:"#ffffff"}},
+ {n:"2 · MASMORRA ÂMBAR",d:"pedra, tocha e ferrugem",
+  dark:{bg:"#1a1613",panel:"#252019",slot:"#120f0c",edge:"#4a3d2e",ink:"#f1e7d8",muted:"#b3a28b",accent:"#ffb347",hp:"#e0533f",mp:"#5fa8d3",xp:"#9ccc65",leg:"#ff8a3d",epi:"#d48cff",onAccent:"#2a1600"},
+  light:{bg:"#f3ede4",panel:"#fffaf3",slot:"#e8dfd2",edge:"#d3c4ae",ink:"#2b2118",muted:"#6e5c48",accent:"#b0600a",hp:"#b8392a",mp:"#2d6f99",xp:"#4c7f2a",leg:"#bf5a00",epi:"#8a4bb5",onAccent:"#ffffff"}},
+ {n:"3 · GAME BOY",d:"os quatro verdes clássicos",
+  dark:{bg:"#0f1f0f",panel:"#173017",slot:"#0a160a",edge:"#2f5a2f",ink:"#d6eba3",muted:"#8fb36a",accent:"#c4e04a",hp:"#e86a4f",mp:"#7ec4cf",xp:"#9bbc0f",leg:"#f2b33d",epi:"#c7a0ff",onAccent:"#0f1f0f"},
+  light:{bg:"#e3edc6",panel:"#f2f7e0",slot:"#d0e0a8",edge:"#a9c278",ink:"#0f380f",muted:"#3f6b2a",accent:"#306230",hp:"#a83a26",mp:"#2a6f7a",xp:"#4f7a0a",leg:"#9a5b00",epi:"#6a3fa0",onAccent:"#e3edc6"}},
+ {n:"4 · FLIPERAMA NAVY",d:"gabinete azul com botões coloridos",
+  dark:{bg:"#0b1230",panel:"#121c45",slot:"#080d24",edge:"#2a3a7a",ink:"#eef1ff",muted:"#93a0d6",accent:"#ffd23f",hp:"#ff5a5a",mp:"#38b6ff",xp:"#4be08a",leg:"#ff9f43",epi:"#c88bff",onAccent:"#1a1400"},
+  light:{bg:"#eef1fb",panel:"#ffffff",slot:"#dfe4f6",edge:"#bcc5ea",ink:"#0f1740",muted:"#4b578f",accent:"#c28b00",hp:"#d23b3b",mp:"#1c6fd1",xp:"#1f9a55",leg:"#c45f00",epi:"#7a45c9",onAccent:"#ffffff"}},
+ {n:"5 · GRIMÓRIO VINHO",d:"couro escuro e folha de ouro",
+  dark:{bg:"#1c1014",panel:"#2a171d",slot:"#140b0e",edge:"#55303b",ink:"#f4e6ea",muted:"#c09aa5",accent:"#e8c26a",hp:"#ff6b6b",mp:"#6fb7e9",xp:"#8fd47a",leg:"#ffa552",epi:"#c79bff",onAccent:"#2a1a00"},
+  light:{bg:"#f6eef0",panel:"#fffbfc",slot:"#ecdde1",edge:"#d9bfc7",ink:"#2c1219",muted:"#7a4f5b",accent:"#9a6b00",hp:"#c2333e",mp:"#2b6a9e",xp:"#3f7f2f",leg:"#b85a00",epi:"#7f45b3",onAccent:"#ffffff"}},
+ {n:"6 · CARTUCHO CINZA",d:"plástico de console, botões vermelho e azul",
+  dark:{bg:"#17181c",panel:"#212328",slot:"#111215",edge:"#3a3d45",ink:"#ececef",muted:"#a2a5ae",accent:"#e8463c",hp:"#e8463c",mp:"#4a7bd6",xp:"#5cc36b",leg:"#f2a23a",epi:"#a98bf0",onAccent:"#ffffff"},
+  light:{bg:"#e6e6ea",panel:"#f7f7f9",slot:"#d8d8de",edge:"#bdbdc6",ink:"#1d1e22",muted:"#585b65",accent:"#c8322a",hp:"#c8322a",mp:"#2f5fb8",xp:"#2f8a3e",leg:"#b86200",epi:"#6c4ec2",onAccent:"#ffffff"}}
+];
+const AV=["..hhhh..",".hhhhhh.",".hsssshh",".sksksh.",".ssssss.","..smms..",".bbbbbb.","bbbbbbbb"];
+const theme=()=>document.documentElement.dataset.theme;
+function render(){const t=theme();document.getElementById('grid').innerHTML=P.map((p,i)=>{const c=p[t];
+  const vars=`--bg:${c.bg};--panel:${c.panel};--slot:${c.slot};--edge:${c.edge};--ink:${c.ink};--muted:${c.muted};--accent:${c.accent};--on-accent:${c.onAccent}`;
+  const av=AV.join('').split('').map(ch=>`<i style="background:${{h:'#3b2416',s:'#f0c39b',k:'#111',m:'#b5654a',b:c.mp}[ch]||'transparent'}"></i>`).join('');
+  return `<section class="pal" style="--i:${i}"><header><h2>${p.n}</h2><span>${p.d}</span></header><div class="body">
+   <table>${ROLES.map(([k,l])=>`<tr><td class="sw"><i style="background:${c[k]}"></i></td><td>${l}</td><td class="hex">${c[k]}</td></tr>`).join('')}</table>
+   <div class="mini" style="${vars}">
+    <div class="card"><div class="who"><div class="av">${av}</div><div><div class="nm">Guilherme Molari</div><div class="cl">Full Stack · Gamificação</div></div></div>
+     ${[["HP",c.hp,92],["MP",c.mp,80],["XP",c.xp,70]].map(([k,col,w])=>`<div class="bar"><span>${k}</span><div><i style="width:${w}%;background:${col}"></i></div></div>`).join('')}</div>
+    <div class="card"><div class="lbl">Atributos</div><div class="attrs"><div class="attr">Front<b>19</b></div><div class="attr">Game<b>18</b></div><div class="attr">Lead<b>16</b></div></div></div>
+    <div class="card"><div class="lbl">Inventário</div><div class="items"><div class="it" style="--c:${c.leg}"><small>LENDÁRIO</small><b>Gamification Loop</b></div><div class="it" style="--c:${c.epi}"><small>ÉPICO</small><b>Supernova Bet</b></div></div></div>
+    <button class="btn" type="button">PRESS START</button>
+   </div></div></section>`}).join('')}
+function setLabel(){document.getElementById('tgl').textContent=theme()==='dark'?'TEMA CLARO':'TEMA ESCURO'}
+document.getElementById('tg').addEventListener('click',e=>{
+  const next=theme()==='dark'?'light':'dark';
+  const apply=()=>{document.documentElement.dataset.theme=next;render();setLabel();document.querySelectorAll('.pal').forEach(s=>s.style.animation='none')};
+  if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches){apply();return}
+  const x=e.clientX,y=e.clientY,r=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+  document.startViewTransition(apply).ready.then(()=>document.documentElement.animate(
+    {clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${r}px at ${x}px ${y}px)`]},
+    {duration:650,easing:'steps(14, end)',pseudoElement:'::view-transition-new(root)'}));
+});
+render();setLabel();
+</script>
+</body>
+</html>
