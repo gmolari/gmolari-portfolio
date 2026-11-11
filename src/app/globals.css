@@ -228,6 +228,8 @@ html.booted .boot { display: none; }
 html:not(.booted):has(.boot) { overflow: hidden; }
 .boot h2 span span { display: inline-block; animation: drop 0.7s cubic-bezier(0.3, 1.6, 0.5, 1) both; }
 .boot.out { animation: wipe 0.6s steps(10) forwards; }
+.boot-progress { width: 0; animation: boot-fill linear forwards; }
+@keyframes boot-fill { to { width: 100%; } }
 html:not(.booted) .animate-enter,
 html:not(.booted) .animate-enter * { animation-play-state: paused !important; }
 

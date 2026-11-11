@@ -96,6 +96,7 @@ export default async function Home({ params }: PageProps<"/[lang]">) {
         sub={`${person.jobTitle[lang]} · ${person.spec[lang]}`.toUpperCase()}
         press={t.pressStart}
         hint={t.pressHint}
+        loading={t.loading}
         skip={t.skip}
         skipHref={`/${lang}/cv`}
       />
